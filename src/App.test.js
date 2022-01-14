@@ -42,6 +42,12 @@ const typeIntroForm = ({email,password,confirmPassword}) => {
   }
 }
 
+const clickonSubmit = () => {
+  const submitBtnElement=screen.getByRole("button",{
+    name:/submit/i
+  });
+  userEvent.click(submitBtnElement);
+}
 // test('renders learn react link', () => {
 //    // 1) Rendering the component we want to test
 //   render(<App />);
@@ -99,9 +105,9 @@ test("should show email error message on invalid email",()=>{
   // render(<App/>)
   const emailErrorElement=screen.queryByText(/the email you input is invalid/i); // null initially
   // const emailInputElement=screen.getByRole("textbox",{name: /email/i});
-  const submitBtnElement=screen.getByRole("button",{
-    name:/submit/i
-  });
+  // const submitBtnElement=screen.getByRole("button",{
+  //   name:/submit/i
+  // });
   
   expect(emailErrorElement).not.toBeInTheDocument();
   
@@ -109,8 +115,8 @@ test("should show email error message on invalid email",()=>{
   typeIntroForm({
     email:"selenagmail.com",
   });
-  userEvent.click(submitBtnElement);
-
+  // userEvent.click(submitBtnElement);
+  clickonSubmit();
   const emailErrorElementAgain=screen.queryByText(/the email you input is invalid/i); 
   expect(emailErrorElementAgain).toBeInTheDocument();
 })
@@ -120,9 +126,9 @@ test("should show password error if password is less than 5 characters",()=>{
   // const emailInputElement=screen.getByRole("textbox",{name: /email/i});
   // const passwordInputElement=screen.getByLabelText("Password");
   const passwordError = screen.queryByText(/password you entered should contain 5 or more characters/i)
-  const submitBtnElement=screen.getByRole("button",{
-    name:/submit/i
-  });
+  // const submitBtnElement=screen.getByRole("button",{
+  //   name:/submit/i
+  // });
   
   // userEvent.type(emailInputElement,"selena@gmail.com");
   typeIntroForm({email:"selna@gmail.com"});
@@ -130,8 +136,8 @@ test("should show password error if password is less than 5 characters",()=>{
   
   // userEvent.type(passwordInputElement,"abcd");
   typeIntroForm({password:"1234"});
-  userEvent.click(submitBtnElement);
-
+  // userEvent.click(submitBtnElement);
+clickonSubmit();
   const passwordErrorAgain = screen.queryByText(/password you entered should contain 5 or more characters/i)
   expect(passwordErrorAgain).toBeInTheDocument();
 
@@ -142,9 +148,9 @@ test("should show confirm password error if password is less than 5 characters",
   // const emailInputElement=screen.getByRole("textbox",{name: /email/i});
   // const passwordInputElement=screen.getByLabelText("Password");
   const confirmPasswordError = screen.queryByText(/the passwords don't match. try again/i)
-  const submitBtnElement=screen.getByRole("button",{
-    name:/submit/i
-  });
+  // const submitBtnElement=screen.getByRole("button",{
+  //   name:/submit/i
+  // });
 
   
   // const confirmpasswordInputElement=screen.getByLabelText(/confirm password/i);
@@ -161,7 +167,8 @@ test("should show confirm password error if password is less than 5 characters",
   // userEvent.type(confirmpasswordInputElement,"12453");
   typeIntroForm({confirmPassword:"12543"});
 
-  userEvent.click(submitBtnElement)
+  // userEvent.click(submitBtnElement)
+  clickonSubmit();
   const passwordErrorAgain = screen.queryByText(/the passwords don't match. try again/i)
   expect(passwordErrorAgain).toBeInTheDocument();
 
@@ -172,9 +179,9 @@ test("should show no error message if every input is valid ",()=>{
   // const emailInputElement=screen.getByRole("textbox",{name: /email/i});
   // const passwordInputElement=screen.getByLabelText("Password");
   // const confirmpasswordInputElement=screen.getByLabelText(/confirm password/i);
-  const submitBtnElement=screen.getByRole("button",{
-    name:/submit/i
-  });
+  // const submitBtnElement=screen.getByRole("button",{
+  //   name:/submit/i
+  // });
 
   // userEvent.type(emailInputElement,"selena@gmail.com");
   // userEvent.type(passwordInputElement,"12345");
@@ -185,8 +192,9 @@ test("should show no error message if every input is valid ",()=>{
     password:"12345",
     confirmPassword:"12345"
   })
-  
-  userEvent.click(submitBtnElement);
+
+  // userEvent.click(submitBtnElement);
+  clickonSubmit();
 
   const emailErrorElement=screen.queryByText(/the email you input is invalid/i);
   const passwordErrorAgain = screen.queryByText(/password you entered should contain 5 or more characters/i)
